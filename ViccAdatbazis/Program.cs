@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<ViccDbContext>(options => options.UseSqlite(connectionString: @"Data Source = .\Data\ViccAdatbazis.db"));
+builder.Services.AddControllers();
 
 var app = builder.Build();
 
@@ -25,5 +26,6 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+app.MapControllers();
 
 app.Run();

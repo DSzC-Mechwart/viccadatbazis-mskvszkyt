@@ -75,8 +75,36 @@ namespace ViccAdatbazis.Controllers
         }
 
         //like
+        [Route("/{id}/like")]
+        [HttpPatch("{id}")]
+        public async Task<ActionResult> LikeVicc(int id)
+        {
+            Vicc vicc = _context.Viccek.Find(id);
+            if (vicc == null)
+            {
+                return BadRequest();
+            }
+            vicc.Tetszik++;
+            _context.Entry(vicc).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
 
         //dislike
+        [Route("/{id}/dislike")]
+        [HttpPatch("{id}")]
+        public async Task<ActionResult> DisLikeVicc(int id)
+        {
+            Vicc vicc = _context.Viccek.Find(id);
+            if (vicc == null)
+            {
+                return BadRequest();
+            }
+            vicc.NemTetszik++;
+            _context.Entry(vicc).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
 
     }
 }
